@@ -8,7 +8,7 @@ The **Swimlane Task Manager** is a task management application designed to help 
 
 You can view a live demo of the application at the following link:
 
-[Live Demo](https://swimlane-task-manager.netlify.app/)
+[Live Demo](https://swimlane-management-app.netlify.app/)
 
 
 ## Features
