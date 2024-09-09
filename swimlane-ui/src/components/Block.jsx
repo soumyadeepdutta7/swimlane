@@ -40,6 +40,9 @@ const Block = ({ block, onEdit }) => {
       <Text fontSize="sm" mb={2}>
         {block.description}
       </Text>
+      <Text fontSize="xs" color="gray.600">
+        Created at: {new Date(block.createdAt).toLocaleString()}
+      </Text>
       <IconButton
         aria-label="Edit Block"
         icon={<EditIcon />}

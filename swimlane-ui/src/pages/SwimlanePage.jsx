@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box, Button, Input, Grid, Heading, Flex, Link } from "@chakra-ui/react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { addBlock, updateBlock, deleteBlock } from "../features/blocksSlice";
+import { addBlock, updateBlock, moveBlock, deleteBlock } from "../features/blocksSlice";
 import Swimlane from "../components/Swimlane";
 import AddEditBlockModal from "../components/AddEditBlockModal";
 
@@ -26,6 +26,10 @@ const SwimlanePage = () => {
     if (blockToEdit) {
       dispatch(updateBlock({ ...blockToEdit, ...block }));
     }
+  };
+
+  const handleMoveBlock = (id, status) => {
+    dispatch(moveBlock({ id, status }));
   };
 
   const handleDeleteBlock = (id) => {
@@ -57,7 +61,7 @@ const SwimlanePage = () => {
         <Flex
           as="nav"
           width="100%"
-          bg="gray.800" 
+          bg="gray.800"
           p={4}
           boxShadow="md"
           justify="space-between"
@@ -84,11 +88,11 @@ const SwimlanePage = () => {
 
         {/* Main container */}
         <Box
-          mt="80px" 
+          mt="80px"
           bg="whiteAlpha.900"
           borderRadius="lg"
           p={8}
-          width="90%"
+          width="100%"
           maxWidth="1200px"
           boxShadow="lg"
         >
@@ -119,7 +123,7 @@ const SwimlanePage = () => {
           </Button>
 
           {/* Swimlanes Grid */}
-          <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={5}>
+          <Grid templateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]} gap={6} mt={5}>
             {["to-do", "in-progress", "done"].map((status) => (
               <Swimlane
                 key={status}
@@ -128,6 +132,7 @@ const SwimlanePage = () => {
                   (block) => block.status === status
                 )}
                 onEdit={openModal}
+                onMove={handleMoveBlock} 
               />
             ))}
           </Grid>
